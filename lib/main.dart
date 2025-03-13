@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 void main() {
-  runApp(const Yummy());
+  runApp(Yummy());
 }
 
 class Yummy extends StatelessWidget {
-  // TODO: setup defaul theme
+  ThemeMode themeMode = ThemeMode.light;
+  ColorSelection colorSelected = ColorSelection.pink;
   
-  const Yummy({super.key});
+  Yummy({super.key});
 
   // TODO: add changeTheme
 
@@ -19,7 +21,16 @@ class Yummy extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       // debugShowCheckedModeBanner: false,
-      // TODO: add theme
+      theme: ThemeData(
+        colorSchemeSeed: colorSelected.color,
+        useMaterial3: true,
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        colorSchemeSeed: colorSelected.color,
+        useMaterial3: true,
+        brightness: Brightness.dark,
+      ),
       // replace Scaffold with Home widget
       home: Scaffold(
         appBar: AppBar(
