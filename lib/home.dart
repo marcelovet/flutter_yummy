@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'components/theme_button.dart';
 import 'components/color_button.dart';
+import 'components/category_card.dart';
+import '../models/food_category.dart';
 
 class Home extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
@@ -44,7 +46,14 @@ class _HomeState extends State<Home> {
     // TODO: define pages
     final pages = [
       // TODO: replace with category card
-      Container(color: Colors.red,),
+      Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 300),
+          child: CategoryCard(
+            category: categories[0],
+          ),
+        ),
+      ),
       // TODO: replace with post card
       Container(color: Colors.green,),
       // TODO: replace with restaurant landscape card
