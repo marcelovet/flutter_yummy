@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'components/theme_button.dart';
+import 'components/color_button.dart';
 
 void main() {
-  runApp(Yummy());
+  runApp(const Yummy());
 }
 
 class Yummy extends StatefulWidget {
@@ -32,10 +34,10 @@ class _YummyState extends State<Yummy> {
   Widget build(BuildContext context) {
     const String appTitle = 'Yummy';
 
-    // TODO: setup theme
     return MaterialApp(
       title: appTitle,
       // debugShowCheckedModeBanner: false,
+      themeMode: themeMode,
       theme: ThemeData(
         colorSchemeSeed: colorSelected.color,
         useMaterial3: true,
@@ -49,7 +51,10 @@ class _YummyState extends State<Yummy> {
       // replace Scaffold with Home widget
       home: Scaffold(
         appBar: AppBar(
-          // TODO: add action buttons
+          actions: <Widget>[
+            ThemeButton(changeThemeMode: changeThemeMode),
+            ColorButton(changeColor: changeColor, colorSelected: colorSelected),
+          ],
           elevation: 4.0,
           title: Text(
             appTitle,
