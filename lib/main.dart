@@ -5,13 +5,28 @@ void main() {
   runApp(Yummy());
 }
 
-class Yummy extends StatelessWidget {
+class Yummy extends StatefulWidget {
+
+  const Yummy({super.key});
+
+  @override
+  State<Yummy> createState() => _YummyState();
+}
+
+class _YummyState extends State<Yummy> {
   ThemeMode themeMode = ThemeMode.light;
   ColorSelection colorSelected = ColorSelection.pink;
-  
-  Yummy({super.key});
 
-  // TODO: add changeTheme
+  void changeThemeMode(bool useLightMode) {
+    setState(() {
+      themeMode = useLightMode ? ThemeMode.light : ThemeMode.dark;
+    });
+  }
+  void changeColor(int value) {
+    setState(() {
+      colorSelected = ColorSelection.values[value];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
