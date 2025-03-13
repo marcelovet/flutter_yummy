@@ -20,9 +20,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int tab = 0;
+  List<NavigationDestination> appBarDestinations =[
+    NavigationDestination(
+      icon: Icon(Icons.credit_card),
+      label: 'Category',
+      selectedIcon: Icon(Icons.credit_card),
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.credit_card),
+      label: 'Post',
+      selectedIcon: Icon(Icons.credit_card),
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.credit_card),
+      label: 'Restaurant',
+      selectedIcon: Icon(Icons.credit_card),
+    ),
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO: define pages
       appBar: AppBar(
         actions: <Widget>[
           ThemeButton(changeThemeMode: widget.changeTheme),
@@ -40,7 +60,15 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      // TODO: add navigation bar
+      bottomNavigationBar: NavigationBar(
+        destinations: appBarDestinations,
+        selectedIndex: tab,
+        onDestinationSelected: (int index) {
+          setState(() {
+            tab = index;
+          });
+        }
+      ),
     );
   }
 }
