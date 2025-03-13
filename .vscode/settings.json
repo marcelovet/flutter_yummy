@@ -1,0 +1,88 @@
+{
+    "window.zoomLevel": 0,
+    
+    "editor.fontSize": 15,
+    "editor.hover.enabled": true,
+    "editor.rulers": [80, 120],
+    "editor.fontFamily": "Consolas, 'Dank Mono', 'Source Code Pro', 'Fira Code', Menlo, 'Inconsolata', 'Droid Sans Mono', 'DejaVu Sans Mono', 'Ubuntu Mono', 'Courier New', Courier, Monaco, monospace",
+    "editor.fontLigatures": false,
+    
+    "workbench.colorTheme": "OM Theme (Default Dracula Italic)",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
+    
+    "explorer.compactFolders": false,
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontFamily": "",
+    
+    "code-runner.executorMap": {
+      "python": "clear ; dart"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.ignoreSelection": true,
+    
+    "emmet.includeLanguages": {
+      "django-html": "html",
+      "jinja-html": "html",
+      "javascript": "javascriptreact",
+      "typescript": "typescriptreact"
+    },
+    
+    "[html]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "vscode.html-language-features",
+      "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+      }
+    },
+    "[django-html]": {
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "vscode.html-language-features",
+      "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+      }
+    },
+    "files.associations": {
+      "*.js": "javascript",
+      "*.jsx": "javascriptreact",
+      "*.xml": "html",
+      "*.svg": "html",
+      "*.html": "html",
+      "django-html": "html", // batisteo.vscode-django
+      "**/*.html": "html",
+      "**/templates/**/*.html": "django-html",
+      "**/base_templates/**/*.html": "django-html",
+      "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+
+
+    
+    "todo-tree.general.tags": ["TODO","FIXME","BUG", "ATTENTION"],
+    "todo-tree.highlights.customHighlight": {
+      "TODO": {
+          "icon": "check-circle-fill",
+          "foreground": "#ffffff",
+          "iconColour": "#de955a",
+          "type": "line",
+          "gutterIcon": true
+      },
+      "FIXME": {
+          "foreground": "#FF7F50",
+          "iconColour": "#b3ff50",
+          "gutterIcon": true,
+          "type": "line"
+      },
+      "ATTENTION": {
+        "icon": "alert-fill",
+        "foreground": "#ffe520",
+        "iconColour": "#9f4a2b",
+        "gutterIcon": true,
+        "type": "line"
+    }
+
+  }
+  }
