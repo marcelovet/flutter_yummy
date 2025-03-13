@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
-import 'components/theme_button.dart';
-import 'components/color_button.dart';
+import 'home.dart';
 
 void main() {
   runApp(const Yummy());
@@ -48,30 +47,10 @@ class _YummyState extends State<Yummy> {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
-      // replace Scaffold with Home widget
-      home: Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            ThemeButton(changeThemeMode: changeThemeMode),
-            ColorButton(changeColor: changeColor, colorSelected: colorSelected),
-          ],
-          elevation: 4.0,
-          title: Text(
-            appTitle,
-            style: const TextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        body: Center(
-          child: Text(
-            "You hungry?\u{1f60b}",
-            style: const TextStyle(
-              fontSize: 24.0,
-            ),
-          ),
-        ),
+      home: Home(
+        changeTheme: changeThemeMode,
+        changeColor: changeColor,
+        colorSelected: colorSelected,
       ),
     );
   }
