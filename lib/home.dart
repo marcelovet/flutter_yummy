@@ -13,12 +13,14 @@ class Home extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
   final void Function(int value) changeColor;
   final ColorSelection colorSelected;
+  final String appTitle;
   
   const Home({
     super.key,
     required this.changeTheme,
     required this.changeColor,
     required this.colorSelected,
+    required this.appTitle,
   });
 
   @override
@@ -47,9 +49,7 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
-    // TODO: define pages
     final pages = [
-      // TODO: replace with category card
       Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 300),
@@ -58,7 +58,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      // TODO: replace with post card
       Center(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -67,7 +66,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      // TODO: replace with restaurant landscape card
       Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 400),

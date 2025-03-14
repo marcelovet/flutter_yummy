@@ -48,6 +48,7 @@ class _YummyState extends State<Yummy> {
         brightness: Brightness.dark,
       ),
       home: Home(
+        appTitle: appTitle,
         changeTheme: changeThemeMode,
         changeColor: changeColor,
         colorSelected: colorSelected,
