@@ -4,6 +4,8 @@ import 'components/theme_button.dart';
 import 'components/color_button.dart';
 import 'components/category_card.dart';
 import '../models/food_category.dart';
+import 'components/post_card.dart';
+import '../models/post.dart';
 
 class Home extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
@@ -55,7 +57,14 @@ class _HomeState extends State<Home> {
         ),
       ),
       // TODO: replace with post card
-      Container(color: Colors.green,),
+      Center(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: PostCard(
+            post: posts[0],
+          ),
+        ),
+      ),
       // TODO: replace with restaurant landscape card
       Container(color: Colors.blue,),
     ];
