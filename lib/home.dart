@@ -68,12 +68,14 @@ class _HomeState extends State<Home> {
         ),
       ),
       // TODO: replace with restaurant landscape card
-      ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 400),
-        child: RestaurantLandscapeCard(
-          restaurant: restaurants[0],
+      Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 400),
+          child: RestaurantLandscapeCard(
+            restaurant: restaurants[0],
+          ),
         ),
-      ),
+      )
     ];
     return Scaffold(
       appBar: AppBar(
