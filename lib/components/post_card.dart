@@ -18,9 +18,29 @@ class PostCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // TODO: add CircleAvatar
-            // TODO: add spacing
-            // TODO: add Expanded Widget
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage(post.profileImageUrl),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    post.comment,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: textTheme.titleMedium,
+                  ),
+                  Text(
+                    "${post.timestamp} mins ago",
+                    style: textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
