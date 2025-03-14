@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'components/theme_button.dart';
 import 'components/color_button.dart';
+import 'screens/explore_page.dart';
 
 class Home extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
@@ -44,12 +45,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      const Center(
-        child: Text(
-          'Explore',
-          style: TextStyle(fontSize: 32.0),
-        ),
-      ),
+      ExplorePage(),
       const Center(
         child: Text(
           'Order Page',
