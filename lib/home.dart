@@ -6,6 +6,8 @@ import 'components/category_card.dart';
 import '../models/food_category.dart';
 import 'components/post_card.dart';
 import '../models/post.dart';
+import 'components/restaurant_landscape_card.dart';
+import '../models/restaurant.dart';
 
 class Home extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
@@ -66,7 +68,12 @@ class _HomeState extends State<Home> {
         ),
       ),
       // TODO: replace with restaurant landscape card
-      Container(color: Colors.blue,),
+      ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 400),
+        child: RestaurantLandscapeCard(
+          restaurant: restaurants[0],
+        ),
+      ),
     ];
     return Scaffold(
       appBar: AppBar(
