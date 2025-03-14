@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import '../models/restaurant.dart';
 
-class RestaurantLandscapeCard extends StatelessWidget {
+class RestaurantLandscapeCard extends StatefulWidget {
   final Restaurant restaurant;
   
   const RestaurantLandscapeCard({super.key, required this.restaurant});
 
+  @override
+  State<RestaurantLandscapeCard> createState() => _RestaurantLandscapeCardState();
+}
+
+class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context)
@@ -23,24 +28,24 @@ class RestaurantLandscapeCard extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 2,
               child: Image.asset(
-                restaurant.imageUrl,
+                widget.restaurant.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           ListTile(
             title: Text(
-              restaurant.name,
+              widget.restaurant.name,
               style: textTheme.titleSmall,
             ),
             subtitle: Text(
-              restaurant.attributes,
+              widget.restaurant.attributes,
               maxLines: 1,
               style: textTheme.bodySmall,
             ),
             onTap: () {
               // ignore: avoid_print
-              print("Tapped on ${restaurant.name}");
+              print("Tapped on ${widget.restaurant.name}");
             },
           ),
         ],
