@@ -11,6 +11,8 @@ class RestaurantLandscapeCard extends StatefulWidget {
 }
 
 class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
+  bool _isFavorited = false;
+  
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context)
@@ -27,9 +29,32 @@ class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
             ),
             child: AspectRatio(
               aspectRatio: 2,
-              child: Image.asset(
-                widget.restaurant.imageUrl,
-                fit: BoxFit.cover,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    widget.restaurant.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 4.0,
+                    right: 4.0,
+                    child: IconButton(
+                      icon: Icon(
+                        _isFavorited
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      ),
+                      iconSize: 30.0,
+                      color: Colors.red[400],
+                      onPressed: () {
+                        setState(() {
+                          _isFavorited = !_isFavorited;
+                        });
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
