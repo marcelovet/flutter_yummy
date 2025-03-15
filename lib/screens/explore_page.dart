@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yummy/components/category_section.dart';
 import '../api/mock_yummy_service.dart';
 import '../components/restaurant_section.dart';
 
@@ -23,11 +24,7 @@ class ExplorePage extends StatelessWidget {
             scrollDirection: Axis.vertical,
             children: [
               RestaurantSection(restaurants: restaurants),
-              // TODO: add CategorySection
-              Container(
-                height: 300,
-                color: Colors.blue,
-              ),
+              CategorySection(categories: categories),
               // TODO: add PostSection
               Container(
                 height: 300,

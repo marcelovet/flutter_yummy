@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
-import 'restaurant_landscape_card.dart';
-import '../models/restaurant.dart';
+import 'category_card.dart';
+import '../models/food_category.dart';
 
-class RestaurantSection extends StatelessWidget {
-  final List<Restaurant> restaurants;
-  
-  const RestaurantSection({super.key, required this.restaurants});
+class CategorySection extends StatelessWidget {
+  final List<FoodCategory> categories;
+
+  const CategorySection({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
             padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
             child: Text(
-              "Food near me",
+              "Categories",
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
-            height: 230,
+            height: 275,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: restaurants.length,
+              itemCount: categories.length,
               itemBuilder: (context, index) {
                 return SizedBox(
-                  width: 300,
-                  child: RestaurantLandscapeCard(
-                    restaurant: restaurants[index],
+                  width: 200,
+                  child: CategoryCard(
+                    category: categories[index],
                   ),
                 );
               },
             ),
           ),
         ],
-      ),
+      )
     );
   }
 }
