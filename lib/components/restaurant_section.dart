@@ -21,11 +21,20 @@ class RestaurantSection extends StatelessWidget {
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
           ),
-          // TODO: add resturant list view
-          Container(
-            height: 400,
-            // TODO: add ListView here
-            color: Colors.grey,
+          SizedBox(
+            height: 230,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: restaurants.length,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 300,
+                  child: RestaurantLandscapeCard(
+                    restaurant: restaurants[index],
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

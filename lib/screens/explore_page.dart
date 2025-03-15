@@ -18,8 +18,23 @@ class ExplorePage extends StatelessWidget {
           final restaurants = snaphot.data?.restaurants ?? []; // if null return empty list
           final categories = snaphot.data?.categories ?? [];
           final posts = snaphot.data?.friendPosts ?? [];
-          // TODO: wrap in ListView
-          return RestaurantSection(restaurants: restaurants);
+          return ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: [
+              RestaurantSection(restaurants: restaurants),
+              // TODO: add CategorySection
+              Container(
+                height: 300,
+                color: Colors.blue,
+              ),
+              // TODO: add PostSection
+              Container(
+                height: 300,
+                color: Colors.green,
+              ),
+            ],
+          );
         } else {
           return const Center(
             child: CircularProgressIndicator(),
