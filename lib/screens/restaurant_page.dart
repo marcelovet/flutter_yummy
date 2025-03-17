@@ -11,22 +11,20 @@ class RestaurantPage extends StatefulWidget {
 }
 
 class _RestaurantPageState extends State<RestaurantPage> {
-  // TODO: add Desktop Threshold
+  static const desktopThreshold = 700;
+
   // TODO: add Constraint properties
   // TODO: Calculate constraint width
-  // TODO: add calculate column count
+  int calculateColumnCount(double screenWidth){
+    return screenWidth > desktopThreshold ? 2 : 1;
+  }
 
   CustomScrollView _buildCustomScrollView() {
     return CustomScrollView(
       slivers: [
         _buildSliverAppBar(),
         _buidInfoSection(),
-        // TODO: add menu item grid view section
-        SliverFillRemaining(
-          child: Container(
-            color: Colors.blue,
-          ),
-        )
+        _buildGridViewSection('Menu'),
       ],
     );
   }
@@ -136,7 +134,21 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
   
-  // TODO: build grid view section
+  SliverToBoxAdapter _buildGridViewSection(String title) {
+    final columns = calculateColumnCount(MediaQuery.of(context).size.width);
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionTitle(title),
+            _buildGridView(columns),
+          ],
+        ),
+      ),
+    );
+  }
   
   // TODO: replace build method
   @override
