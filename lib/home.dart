@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yummy/models/cart_manager.dart';
+import 'package:yummy/models/order_manager.dart';
 import 'constants.dart';
 import 'components/theme_button.dart';
 import 'components/color_button.dart';
@@ -9,6 +11,8 @@ class Home extends StatefulWidget {
   final void Function(int value) changeColor;
   final ColorSelection colorSelected;
   final String appTitle;
+  final CartManager cartManager;
+  final OrderManager orderManager;
   
   const Home({
     super.key,
@@ -16,6 +20,8 @@ class Home extends StatefulWidget {
     required this.changeColor,
     required this.colorSelected,
     required this.appTitle,
+    required this.cartManager,
+    required this.orderManager,
   });
 
   @override
