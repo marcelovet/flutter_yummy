@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yummy/components/item_details.dart';
 import 'package:yummy/components/restaurant_item.dart';
 import '../models/restaurant.dart';
 import '../models/cart_manager.dart';
@@ -114,13 +115,10 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
 
-  // TODO: build grid item
   Widget _buildGridItem(int index) {
     final item = widget.restaurant.items[index];
     return InkWell(
-      onTap: () {
-        // Present Bottom Sheet in the future.
-      },
+      onTap: () => _showBottomSheet(item),
       child: RestaurantItem(item: item),
     );
   }
@@ -170,7 +168,20 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
   
-  // TODO: Show Bottom Sheet
+  void _showBottomSheet(Item item) {
+    showModalBottomSheet<void>(
+      isScrollControlled: true,
+      context: context,
+      constraints: BoxConstraints(maxWidth: 480.0),
+      // TODO: Replace with item details widget
+      builder: (context) => ItemDetails(
+        item: item,
+        cartManager: widget.cartManager,
+        quantityUpdated: () => setState(() {}),
+      ),
+    );
+  }
+
   // TODO: Create Drawer
   // TODO: Open Drawer
   // TODO: Create Floating Action Button
