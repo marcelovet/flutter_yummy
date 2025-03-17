@@ -18,17 +18,57 @@ class _CartControlState extends State<CartControl> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // TODO: add cart control components
-        Container(
-          color: Colors.red,
-          height: 48.0,
-        ),
+        _buildMinusButton(),
+        _buildCartNumberContainer(colorScheme),
+        _buildPlusButton(),
+        const Spacer(),
+        _buildAddCartButton(),
       ],
     );
   }
 
-  // TODO: build minus button
-  // TODO: build plus button
-  // TODO: build cart number
-  // TODO: build add to cart button
+  Widget _buildMinusButton() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          if (_cartNumber > 1) {
+            _cartNumber--;
+          }
+        });
+      },
+      icon: const Icon(Icons.remove),
+      tooltip: "Decrease Cart Count",
+    );
+  }
+  
+  Widget _buildPlusButton() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          _cartNumber++;
+        });
+      },
+      icon: const Icon(Icons.add),
+      tooltip: "Increase Cart Count",
+    );
+  }
+
+  Widget _buildCartNumberContainer(ColorScheme colorScheme) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 8.0,
+      ),
+      color: colorScheme.onPrimary,
+      child: Text(_cartNumber.toString()),
+    );
+  }
+
+  Widget _buildAddCartButton() {
+    return FilledButton(
+      onPressed: () => widget.addToCart(_cartNumber),
+      child: const Text("Add to Cart"),
+    );
+  }
+
 }

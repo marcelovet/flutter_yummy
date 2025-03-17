@@ -173,7 +173,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
       isScrollControlled: true,
       context: context,
       constraints: BoxConstraints(maxWidth: 480.0),
-      // TODO: Replace with item details widget
       builder: (context) => ItemDetails(
         item: item,
         cartManager: widget.cartManager,

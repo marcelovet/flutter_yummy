@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import '../components/cart_control.dart';
 import '../models/restaurant.dart';
 import '../models/cart_manager.dart';
 
@@ -52,7 +54,8 @@ class _ItemDetailsState extends State<ItemDetails> {
               Text(widget.item.description),
               const SizedBox(height: 16.0),
               _itemImage(widget.item.imageUrl),
-              // TODO: add cart control
+              const SizedBox(height: 16.0),
+              _addCartControl(widget.item),
             ],
           ),
         ],
@@ -84,6 +87,24 @@ class _ItemDetailsState extends State<ItemDetails> {
     );
   }
   
-  // TODO: Create cart control
-  
+  Widget _addCartControl(Item item) {
+    return CartControl(
+      addToCart: (number) {
+        const uuid = Uuid();
+        final uniqueId = uuid.v4();
+        final cartItem = CartItem(
+          id: uniqueId,
+          name: item.name,
+          price: item.price,
+          quantity: number,
+        );
+        setState(() {
+          widget.cartManager.addItem(cartItem);
+          widget.quantityUpdated();
+        });
+        Navigator.pop(context);
+      }
+    );
+  }
+
 }
