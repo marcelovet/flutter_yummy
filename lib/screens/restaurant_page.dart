@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:yummy/components/restaurant_item.dart';
 import '../models/restaurant.dart';
+import '../models/cart_manager.dart';
+import '../models/order_manager.dart';
 
 class RestaurantPage extends StatefulWidget {
   final Restaurant restaurant;
-  const RestaurantPage({super.key, required this.restaurant});
+  final CartManager cartManager;
+  final OrderManager ordersManager;
+  
+  const RestaurantPage({
+    super.key,
+    required this.restaurant,
+    required this.cartManager,
+    required this.ordersManager,
+  });
 
   @override
   State<RestaurantPage> createState() => _RestaurantPageState();
@@ -14,6 +24,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
   static const desktopThreshold = 700;
   static const double largeScreenPercentage = 0.9;
   static const double maxWidth = 1000;
+  // TODO: Define Drawer Max Width
+  // TODO: Define Scaffold Key
   
   double calculateConstrainedtWidth(double screenWidth){
     return (
@@ -107,7 +119,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
     final item = widget.restaurant.items[index];
     return InkWell(
       onTap: () {
-        // TODO: navigate to item detail page
+        // Present Bottom Sheet in the future.
       },
       child: RestaurantItem(item: item),
     );
@@ -158,12 +170,20 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
   
+  // TODO: Show Bottom Sheet
+  // TODO: Create Drawer
+  // TODO: Open Drawer
+  // TODO: Create Floating Action Button
+  
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final constrainedWidth = calculateConstrainedtWidth(screenWidth);
     
     return Scaffold(
+      // TODO: Add Scaffold Key
+      // TODO: Apply Drawer
+      // TODO: Apply Floating Action Button
       body: Center(
         child: SizedBox(
           width: constrainedWidth,

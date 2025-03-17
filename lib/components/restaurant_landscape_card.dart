@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import '../models/restaurant.dart';
-import '../screens/restaurant_page.dart';
 
 class RestaurantLandscapeCard extends StatefulWidget {
   final Restaurant restaurant;
+  final Function() onTap;
   
-  const RestaurantLandscapeCard({super.key, required this.restaurant});
+  const RestaurantLandscapeCard({
+    super.key,
+    required this.restaurant,
+    required this.onTap
+  });
 
   @override
   State<RestaurantLandscapeCard> createState() => _RestaurantLandscapeCardState();
@@ -69,16 +73,7 @@ class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
               maxLines: 1,
               style: textTheme.bodySmall,
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RestaurantPage(
-                    restaurant: widget.restaurant,
-                  ),
-                ),
-              );
-            },
+            onTap: widget.onTap,
           ),
         ],
       ),

@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:yummy/components/category_section.dart';
 import 'package:yummy/components/post_section.dart';
+import 'package:yummy/models/cart_manager.dart';
+import 'package:yummy/models/order_manager.dart';
 import '../api/mock_yummy_service.dart';
 import '../components/restaurant_section.dart';
 
 class ExplorePage extends StatelessWidget {
   final mockService = MockYummyService();
+  final CartManager cartManager;
+  final OrderManager orderManager;
   
-  ExplorePage({super.key});
+  ExplorePage({
+    super.key,
+    required this.cartManager,
+    required this.orderManager,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +30,11 @@ class ExplorePage extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             children: [
-              RestaurantSection(restaurants: restaurants),
+              RestaurantSection(
+                restaurants: restaurants,
+                cartManager: cartManager,
+                orderManager: orderManager,
+              ),
               CategorySection(categories: categories),
               PostSection(posts: posts),
             ],

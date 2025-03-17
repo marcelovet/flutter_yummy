@@ -51,13 +51,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      ExplorePage(),
+      ExplorePage(
+        cartManager: widget.cartManager,
+        orderManager: widget.orderManager,
+      ),
+      // TODO: Replace with Order Page
       const Center(
         child: Text(
           'Order Page',
           style: TextStyle(fontSize: 32.0),
         ),
       ),
+      // TODO: Replace with Account Page
       const Center(
         child: Text(
           'Account Page',
