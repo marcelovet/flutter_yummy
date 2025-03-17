@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yummy/components/restaurant_item.dart';
 import '../models/restaurant.dart';
 
 class RestaurantPage extends StatefulWidget {
@@ -94,11 +95,46 @@ class _RestaurantPageState extends State<RestaurantPage> {
       ),
     );
   }
+
   // TODO: build grid item
+  Widget _buildGridItem(int index) {
+    final item = widget.restaurant.items[index];
+    return InkWell(
+      onTap: () {
+        // TODO: navigate to item detail page
+      },
+      child: RestaurantItem(item: item),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
   
-  // TODO: build section title
-  
-  // TODO: build grid view
+  Widget _buildGridView(int columns) {
+    return GridView.builder(
+      padding: EdgeInsets.all(0.0),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        mainAxisSpacing: 16.0,
+        crossAxisSpacing: 16.0,
+        childAspectRatio: 3.5,
+        crossAxisCount: columns,
+      ),
+      itemBuilder: (context, index) => _buildGridItem(index),
+      itemCount: widget.restaurant.items.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+    );
+  }
   
   // TODO: build grid view section
   
