@@ -24,6 +24,7 @@ class _ItemDetailsState extends State<ItemDetails> {
     final textTheme = Theme.of(context)
       .textTheme
       .apply(displayColor: Theme.of(context).colorScheme.onSurface);
+    final colorTheme = Theme.of(context).colorScheme;
     
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -32,14 +33,25 @@ class _ItemDetailsState extends State<ItemDetails> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.item.name,
-                style: textTheme.headlineMedium,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.item.name,
+                    style: textTheme.headlineMedium,
+                  ),
+                  Text(
+                    widget.item.price.toStringAsFixed(2),
+                    style: textTheme.headlineSmall,
+                  ),
+                ],
               ),
-              // TODO: add liked badge
+              const SizedBox(height: 16.0),
+              _mostLikedBadge(colorTheme),
+              const SizedBox(height: 16.0),
               Text(widget.item.description),
-              // TODO: add Item price?
-              // TODO: add Item image
+              const SizedBox(height: 16.0),
+              _itemImage(widget.item.imageUrl),
               // TODO: add cart control
             ],
           ),
@@ -48,7 +60,30 @@ class _ItemDetailsState extends State<ItemDetails> {
     );
   }
 
-  // TODO: Create most liked badge
-  // TODO: Create item image
+  Widget _mostLikedBadge(ColorScheme colorTheme) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.all(4.0),
+        color: colorTheme.onPrimary,
+        child: const Text("#1 Most liked"),
+      ),
+    );
+  }
+  
+  Widget _itemImage(String imageUrl) {
+    return Container(
+      height: 200.0,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+    );
+  }
+  
   // TODO: Create cart control
+  
 }
