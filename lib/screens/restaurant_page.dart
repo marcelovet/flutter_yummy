@@ -12,9 +12,17 @@ class RestaurantPage extends StatefulWidget {
 
 class _RestaurantPageState extends State<RestaurantPage> {
   static const desktopThreshold = 700;
+  static const double largeScreenPercentage = 0.9;
+  static const double maxWidth = 1000;
+  
+  double calculateConstrainedtWidth(double screenWidth){
+    return (
+      screenWidth > desktopThreshold
+        ? screenWidth * largeScreenPercentage
+        : screenWidth
+    ).clamp(0.0, maxWidth);
+  }
 
-  // TODO: add Constraint properties
-  // TODO: Calculate constraint width
   int calculateColumnCount(double screenWidth){
     return screenWidth > desktopThreshold ? 2 : 1;
   }
@@ -150,12 +158,17 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
   
-  // TODO: replace build method
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final constrainedWidth = calculateConstrainedtWidth(screenWidth);
+    
     return Scaffold(
       body: Center(
-        child: _buildCustomScrollView(),
+        child: SizedBox(
+          width: constrainedWidth,
+          child: _buildCustomScrollView(),
+        )
       ),
     );
   }
