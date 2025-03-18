@@ -24,9 +24,9 @@ class RestaurantPage extends StatefulWidget {
 class _RestaurantPageState extends State<RestaurantPage> {
   static const desktopThreshold = 700;
   static const double largeScreenPercentage = 0.9;
-  static const double maxWidth = 1000;
-  // TODO: Define Drawer Max Width
-  // TODO: Define Scaffold Key
+  static const double maxWidth = 1000.0;
+  static const double drawerWidth = 375.0;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   
   double calculateConstrainedtWidth(double screenWidth){
     return (
@@ -181,9 +181,28 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
 
-  // TODO: Create Drawer
-  // TODO: Open Drawer
-  // TODO: Create Floating Action Button
+  Widget _buildEndDrawer() {
+    return SizedBox(
+      width: drawerWidth,
+      // TODO: replace with checkout page
+      child: Container(color: Colors.red,),
+    );
+  }
+  
+  void openDrawer() {
+    scaffoldKey.currentState!.openEndDrawer();
+  }
+
+  Widget _buildFloatingActionButton() {
+    return FloatingActionButton.extended(
+      onPressed: openDrawer,
+      tooltip: "Cart",
+      icon: const Icon(Icons.shopping_cart),
+      label: Text(
+        "${widget.cartManager.items.length} items in cart",
+      ),
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -191,9 +210,9 @@ class _RestaurantPageState extends State<RestaurantPage> {
     final constrainedWidth = calculateConstrainedtWidth(screenWidth);
     
     return Scaffold(
-      // TODO: Add Scaffold Key
-      // TODO: Apply Drawer
-      // TODO: Apply Floating Action Button
+      key: scaffoldKey,
+      endDrawer: _buildEndDrawer(),
+      floatingActionButton: _buildFloatingActionButton(),
       body: Center(
         child: SizedBox(
           width: constrainedWidth,
