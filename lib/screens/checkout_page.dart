@@ -123,21 +123,46 @@ class _CheckoutPageState extends State<CheckoutPage> {
         itemBuilder: (context, index) {
           final item = widget.cartManager.itemAt(index);
           
-          // TODO: wrap in dismissible widget
-          return ListTile(
-            leading: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                border: Border.all(color: colorTheme.primary, width: 2.0),
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                child: Text("x${item.quantity}"),
+          return Dismissible(
+            key: Key(item.id),
+            direction: DismissDirection.endToStart,
+            background: Container(),
+            secondaryBackground: const SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [Icon(Icons.delete)],
               ),
             ),
-            title: Text(item.name),
-            subtitle: Text("Price: \$${item.price}"),
+            onDismissed: (direction) {
+              setState(() {
+                widget.cartManager.removeItem(item.id);
+              });
+              widget.didUpdate();
+            },
+            child: ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  border: Border.all(color: colorTheme.primary, width: 2.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  child: Text("x${item.quantity}"),
+                ),
+              ),
+              title: Text(item.name),
+              subtitle: Text("Price: \$${item.price}"),
+              trailing: IconButton(
+                onPressed: () {
+                  setState(() {
+                    widget.cartManager.removeItem(item.id);
+                  });
+                  widget.didUpdate();
+                },
+                icon: const Icon(Icons.delete),
+              ),
+            ),
           );
         },
       )
