@@ -169,7 +169,33 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  // TODO: build submit order button
+  Widget _buildSubmitButton() {
+    return ElevatedButton(
+      onPressed: widget.cartManager.isEmpty
+        ? null
+        : () {
+          final selectedSegment = this.selectedSegment;
+          final selectedTime = this.selectedTime;
+          final selectedDate = this.selectedDate;
+          final name = _nameController.text;
+          final items = widget.cartManager.items;
+
+          final order = Order(
+            selectedSegment: selectedSegment,
+            selectedTime: selectedTime,
+            selectedDate: selectedDate,
+            name: name,
+            items: items
+          );
+          widget.cartManager.resetCart();
+          widget.onSubmit(order);
+        },
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text('Submit Order - \$${widget.cartManager.totalCost.toStringAsFixed(2)}')
+      ),
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -218,7 +244,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             const SizedBox(height: 16.0),
             const Text("Order Summary"),
             _buildOrderSummary(context),
-            // TODO: add submit order button
+            _buildSubmitButton(),
           ],
         ),
       )
