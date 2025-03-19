@@ -114,7 +114,36 @@ class _CheckoutPageState extends State<CheckoutPage> {
     }
   }
   
-  // TODO: build order summary
+  Widget _buildOrderSummary(BuildContext context) {
+    final colorTheme = Theme.of(context).colorScheme;
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: widget.cartManager.items.length,
+        itemBuilder: (context, index) {
+          final item = widget.cartManager.itemAt(index);
+          
+          // TODO: wrap in dismissible widget
+          return ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                border: Border.all(color: colorTheme.primary, width: 2.0),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                child: Text("x${item.quantity}"),
+              ),
+            ),
+            title: Text(item.name),
+            subtitle: Text("Price: \$${item.price}"),
+          );
+        },
+      )
+    );
+  }
+
   // TODO: build submit order button
   
   @override
@@ -161,7 +190,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 ),
               ],
             ),
-            // TODO: add order summary
+            const SizedBox(height: 16.0),
+            const Text("Order Summary"),
+            _buildOrderSummary(context),
             // TODO: add submit order button
           ],
         ),
