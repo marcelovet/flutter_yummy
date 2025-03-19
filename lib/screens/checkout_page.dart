@@ -19,10 +19,46 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
-  // TODO: add state properties
+  final Map<int, Widget> myTabs = const <int, Widget>{
+    0: Tab(text: 'Delivery'),
+    1: Tab(text: 'Self Pick-up'),
+  };
+  Set<int> selectedSegment = {0};
+  TimeOfDay? selectedTime;
+  DateTime? selectedDate;
+  final DateTime _firstDate = DateTime(DateTime.now().year - 2);
+  final DateTime _lastDate = DateTime(DateTime.now().year + 1);
+  final TextEditingController _nameController = TextEditingController();
+
   // TODO: configure date format
   // TODO: configure time of day
-  // TODO: set selected segment
+  
+  void onSegmentSelected(Set<int> segmentIndex) {
+    setState(() {
+      selectedSegment = segmentIndex;
+    });
+  }
+
+  Widget _buildOrderSegmentedType() {
+    return SegmentedButton(
+      showSelectedIcon: false,
+      segments: const [
+        ButtonSegment(
+          value: 0,
+          label: Text('Delivery'),
+          icon: Icon(Icons.pedal_bike),
+        ),
+        ButtonSegment(
+          value: 1,
+          label: Text('Pickup'),
+          icon: Icon(Icons.local_mall),
+        ),
+      ],
+      selected: selectedSegment,
+      onSelectionChanged: onSegmentSelected,
+    );
+  }
+
   // TODO: build name textfield
   // TODO: select date picker
   // TODO: select time picker
@@ -51,7 +87,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
               'Order details',
               style: textTheme.headlineSmall,
             ),
-            // TODO: add segmented control
+            const SizedBox(height: 16.0),
+            _buildOrderSegmentedType(),
             // TODO: add name textfield
             // TODO: add date and time picker
             // TODO: add order summary
