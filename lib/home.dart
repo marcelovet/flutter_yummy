@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yummy/models/cart_manager.dart';
 import 'package:yummy/models/order_manager.dart';
+import 'package:yummy/screens/myorders_page.dart';
 import 'constants.dart';
 import 'components/theme_button.dart';
 import 'components/color_button.dart';
@@ -55,13 +56,7 @@ class _HomeState extends State<Home> {
         cartManager: widget.cartManager,
         orderManager: widget.orderManager,
       ),
-      // TODO: Replace with Order Page
-      const Center(
-        child: Text(
-          'Order Page',
-          style: TextStyle(fontSize: 32.0),
-        ),
-      ),
+      MyordersPage(orderManager: widget.orderManager),
       // TODO: Replace with Account Page
       const Center(
         child: Text(
