@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yummy/components/item_details.dart';
 import 'package:yummy/components/restaurant_item.dart';
+import 'package:yummy/screens/checkout_page.dart';
 import '../models/restaurant.dart';
 import '../models/cart_manager.dart';
 import '../models/order_manager.dart';
@@ -184,8 +185,16 @@ class _RestaurantPageState extends State<RestaurantPage> {
   Widget _buildEndDrawer() {
     return SizedBox(
       width: drawerWidth,
-      // TODO: replace with checkout page
-      child: Container(color: Colors.red,),
+      child: Drawer(
+        child: CheckoutPage(
+          cartManager: widget.cartManager,
+          didUpdate: () => setState(() {}),
+          onSubmit: (order) {
+            widget.ordersManager.addOrder(order);
+            Navigator.popUntil(context, (route) => route.isFirst);
+          }
+        ),
+      ),
     );
   }
   
