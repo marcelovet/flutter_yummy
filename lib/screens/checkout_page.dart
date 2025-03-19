@@ -76,6 +76,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
       decoration: const InputDecoration(
         labelText: 'Contact Name',
       ),
+      onTapOutside: (event) {
+        FocusScope.of(context).unfocus();
+        if (_nameController.text.isNotEmpty) {
+          setState(() {});
+        }
+      },
     );
   }
 
@@ -169,9 +175,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
+  bool _canSubmit() {
+    return !widget.cartManager.isEmpty
+      && _nameController.text.isNotEmpty
+      && selectedTime != null
+      && selectedDate != null;
+  }
+  
   Widget _buildSubmitButton() {
     return ElevatedButton(
-      onPressed: widget.cartManager.isEmpty
+      onPressed: !_canSubmit()
         ? null
         : () {
           final selectedSegment = this.selectedSegment;
