@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../models/cart_manager.dart';
 import '../models/order_manager.dart';
 
@@ -30,8 +31,18 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final DateTime _lastDate = DateTime(DateTime.now().year + 1);
   final TextEditingController _nameController = TextEditingController();
 
-  // TODO: configure date format
-  // TODO: configure time of day
+  String formatDate(DateTime? dateTime){
+    if(dateTime == null) return 'Select Date';
+    final formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(dateTime);
+  }
+  
+  String formatTimeofDay(TimeOfDay? timeOfDay){
+    if(timeOfDay == null) return 'Select Time';
+    final hour = timeOfDay.hour.toString().padLeft(2, '0');
+    final minute = timeOfDay.minute.toString().padLeft(2, '0');
+    return '$hour:$minute';
+  }
   
   void onSegmentSelected(Set<int> segmentIndex) {
     setState(() {
@@ -59,9 +70,50 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  // TODO: build name textfield
-  // TODO: select date picker
-  // TODO: select time picker
+  Widget _buildTextField() {
+    return TextField(
+      controller: _nameController,
+      decoration: const InputDecoration(
+        labelText: 'Contact Name',
+      ),
+    );
+  }
+
+  void _selectDate(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      firstDate: _firstDate,
+      lastDate: _lastDate,
+      initialDate: selectedDate ?? DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  void _selectTime(BuildContext context) async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime ?? TimeOfDay.now(),
+      initialEntryMode: TimePickerEntryMode.input,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            alwaysUse24HourFormat: true,
+          ),
+          child: child!,
+        );
+      }
+    );
+    if (picked != null && picked != selectedTime) {
+      setState(() {
+        selectedTime = picked;
+      });
+    }
+  }
+  
   // TODO: build order summary
   // TODO: build submit order button
   
@@ -89,8 +141,26 @@ class _CheckoutPageState extends State<CheckoutPage> {
             ),
             const SizedBox(height: 16.0),
             _buildOrderSegmentedType(),
-            // TODO: add name textfield
-            // TODO: add date and time picker
+            const SizedBox(height: 16.0),
+            _buildTextField(),
+            const SizedBox(height: 16.0),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () => _selectDate(context),
+                    child: Text(formatDate(selectedDate)),
+                  ),
+                ),
+                const SizedBox(width: 16.0),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () => _selectTime(context),
+                    child: Text(formatTimeofDay(selectedTime)),
+                  ),
+                ),
+              ],
+            ),
             // TODO: add order summary
             // TODO: add submit order button
           ],
