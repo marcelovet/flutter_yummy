@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/restaurant.dart';
+import 'package:yummy/models/models.dart';
 
 class RestaurantLandscapeCard extends StatefulWidget {
   final Restaurant restaurant;

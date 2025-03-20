@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'restaurant_landscape_card.dart';
-import '../models/restaurant.dart';
-import '../models/cart_manager.dart';
-import '../models/order_manager.dart';
-import '../screens/restaurant_page.dart';
+import 'package:yummy/models/models.dart';
+import 'package:yummy/screens/screens.dart';
+import 'package:yummy/components/components.dart';
 
 class RestaurantSection extends StatelessWidget {
   final List<Restaurant> restaurants;
@@ -42,6 +40,7 @@ class RestaurantSection extends StatelessWidget {
                   child: RestaurantLandscapeCard(
                     restaurant: restaurants[index],
                     onTap: () {
+                      // TODO: Navigate to Restaurant using go_router
                       Navigator.push(
                         context,
                         MaterialPageRoute(
