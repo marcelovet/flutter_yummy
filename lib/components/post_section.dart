@@ -21,15 +21,20 @@ class PostSection extends StatelessWidget {
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
           ),
-          ListView.separated(
-            primary: false,
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => PostCard(post: posts[index]),
-            separatorBuilder: (context, index) => SizedBox(height: 16),
-            itemCount: posts.length,
-          ),
+          SizedBox(
+            height: 110,
+            child: ListView.separated(
+              primary: false,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => SizedBox(
+                width: 300.0,
+                child:PostCard(post: posts[index]),
+              ),
+              separatorBuilder: (context, index) => SizedBox(height: 16),
+              itemCount: posts.length,
+            ),
+          )
         ],
       )
     );
