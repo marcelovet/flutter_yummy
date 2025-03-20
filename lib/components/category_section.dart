@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'category_card.dart';
-import '../models/food_category.dart';
+import 'package:yummy/components/components.dart';
+import 'package:yummy/models/models.dart';
 
 class CategorySection extends StatelessWidget {
   final List<FoodCategory> categories;

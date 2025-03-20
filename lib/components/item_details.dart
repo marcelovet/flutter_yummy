@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import '../components/cart_control.dart';
-import '../models/restaurant.dart';
-import '../models/cart_manager.dart';
+import 'package:yummy/components/components.dart';
+import 'package:yummy/models/models.dart';
 
 class ItemDetails extends StatefulWidget {
   final Item item;

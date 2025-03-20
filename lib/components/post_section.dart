@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/post.dart';
-import 'post_card.dart';
+import 'package:yummy/components/components.dart';
+import 'package:yummy/models/models.dart';
 
 class PostSection extends StatelessWidget {
   final List<Post> posts;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/food_category.dart';
+import 'package:yummy/models/models.dart';
 
 class CategoryCard extends StatelessWidget {
   final FoodCategory category;
