@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yummy/models/models.dart';
 import 'package:yummy/screens/screens.dart';
 import 'constants.dart';
@@ -37,7 +38,16 @@ class _YummyState extends State<Yummy> {
   final CartManager _cartManager = CartManager();
   /// Manage user's orders submitted
   final OrderManager _orderManager = OrderManager();
-  // TODO: Initialize GoRouter
+  late final _router = GoRouter(
+    initialLocation: '/login',
+    // TODO: Add Redirect Handler
+    routes: [
+      // TODO: Add login route
+      // TODO: Add home route
+    ],
+    // TODO: Add error handler
+  );
+  
   // TODO: Add Redirect Handler
 
   void changeThemeMode(bool useLightMode) {
