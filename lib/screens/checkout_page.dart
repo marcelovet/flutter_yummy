@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/cart_manager.dart';
-import '../models/order_manager.dart';
+import 'package:yummy/models/models.dart';
 
 class CheckoutPage extends StatefulWidget {
   final CartManager cartManager;

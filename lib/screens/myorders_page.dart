@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/order_manager.dart';
+import 'package:yummy/models/models.dart';
 
 class MyordersPage extends StatelessWidget {
   final OrderManager orderManager;
@@ -24,7 +24,7 @@ class MyordersPage extends StatelessWidget {
         )
       ),
       body: ListView.builder(
-        itemCount: orderManager.orders.length,
+        itemCount: orderManager.totalOrders,
         itemBuilder: (context, index) {
           return OrderTile(order: orderManager.orders[index]);
         }
