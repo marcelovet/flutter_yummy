@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yummy/models/cart_manager.dart';
-import 'package:yummy/models/order_manager.dart';
-import 'package:yummy/screens/myorders_page.dart';
+import 'package:yummy/models/models.dart';
+import 'package:yummy/screens/screens.dart';
+import 'package:yummy/components/components.dart';
 import 'constants.dart';
-import 'components/theme_button.dart';
-import 'components/color_button.dart';
-import 'screens/explore_page.dart';
 
 class Home extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
@@ -14,6 +11,8 @@ class Home extends StatefulWidget {
   final String appTitle;
   final CartManager cartManager;
   final OrderManager orderManager;
+  final YummyAuth auth;
+  final int tab;
   
   const Home({
     super.key,
@@ -23,6 +22,8 @@ class Home extends StatefulWidget {
     required this.appTitle,
     required this.cartManager,
     required this.orderManager,
+    required this.auth,
+    required this.tab,
   });
 
   @override
@@ -30,7 +31,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int tab = 0;
   List<NavigationDestination> appBarDestinations = const [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
@@ -57,12 +57,18 @@ class _HomeState extends State<Home> {
         orderManager: widget.orderManager,
       ),
       MyordersPage(orderManager: widget.orderManager),
-      // TODO: Replace with Account Page
-      const Center(
-        child: Text(
-          'Account Page',
-          style: TextStyle(fontSize: 32.0),
+      AccountPage(
+        user: User(
+          firstName: 'John',
+          lastName: "Doe",
+          role: 'Flutteristas',
+          profileImageUrl: 'assets/profile_pics/person_stef.jpeg',
+          points: 100,
+          darkMode: true
         ),
+        onLogOut: (logout) async {
+          // TODO: Logout and go to login
+        }
       ),
     ];
     
@@ -73,20 +79,18 @@ class _HomeState extends State<Home> {
           ThemeButton(changeThemeMode: widget.changeTheme),
           ColorButton(changeColor: widget.changeColor, colorSelected: widget.colorSelected),
         ],
-        elevation: 4.0,
+        elevation: 0.0,
         backgroundColor: Theme.of(context).colorScheme.surface,
       ),
       body: IndexedStack(
-        index: tab,
+        index: widget.tab,
         children: pages,
       ),
       bottomNavigationBar: NavigationBar(
         destinations: appBarDestinations,
-        selectedIndex: tab,
-        onDestinationSelected: (int index) {
-          setState(() {
-            tab = index;
-          });
+        selectedIndex: widget.tab,
+        onDestinationSelected: (index) {
+          // TODO: Navigate to specific tab
         }
       ),
     );
