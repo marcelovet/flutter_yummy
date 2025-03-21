@@ -42,10 +42,55 @@ class _YummyState extends State<Yummy> {
     initialLocation: '/login',
     // TODO: Add Redirect Handler
     routes: [
-      // TODO: Add login route
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => LoginPage(
+          onLogIn: (Credentials credentials) async {
+            await _auth.signIn(credentials.username, credentials.password);
+            if (await _auth.loggedIn && context.mounted) {
+              context.go('/${YummyTab.home.value}');
+            }
+          }
+        ),
+      ),
       // TODO: Add home route
     ],
-    // TODO: Add error handler
+    errorPageBuilder: (context, state) {
+      return MaterialPage(
+        key: state.pageKey,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Page Not Found'),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.error_outline,
+                size: 80,
+                color: Colors.red,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Oops! Page Not Found',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'The page you are looking for doesn\'t exist or has been moved.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () => context.go('/'),
+                child: const Text('Go to Home'),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
   );
   
   // TODO: Add Redirect Handler
@@ -64,10 +109,10 @@ class _YummyState extends State<Yummy> {
   @override
   Widget build(BuildContext context) {
     const String appTitle = 'Yummy';
-    // TODO: Replace with Router
-    return MaterialApp(
+    return MaterialApp.router(
       title: appTitle,
       debugShowCheckedModeBanner: false,
+      // TODO: add custom scroll behavior
       scrollBehavior: CustomScrollBehavior(),
       themeMode: themeMode,
       theme: ThemeData(
@@ -80,7 +125,7 @@ class _YummyState extends State<Yummy> {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
-      home: LoginPage(onLogIn: (credentials) {}),
+      routerConfig: _router,
     );
   }
 }
