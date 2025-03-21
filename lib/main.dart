@@ -29,6 +29,7 @@ class Yummy extends StatefulWidget {
 }
 
 class _YummyState extends State<Yummy> {
+  final String appTitle = 'Yummy';
   ThemeMode themeMode = ThemeMode.light;
   ColorSelection colorSelected = ColorSelection.pink;
   /// Authentication to manage user login session
@@ -40,7 +41,7 @@ class _YummyState extends State<Yummy> {
   final OrderManager _orderManager = OrderManager();
   late final _router = GoRouter(
     initialLocation: '/login',
-    // TODO: Add Redirect Handler
+    redirect: _appRedirect,
     routes: [
       GoRoute(
         path: '/login',
@@ -53,7 +54,24 @@ class _YummyState extends State<Yummy> {
           }
         ),
       ),
-      // TODO: Add home route
+      GoRoute(
+        path: '/:tab',
+        builder: (context, state) {
+          return Home(
+            changeTheme: changeThemeMode,
+            changeColor: changeColor,
+            colorSelected: colorSelected,
+            appTitle: appTitle,
+            cartManager: _cartManager,
+            orderManager: _orderManager,
+            auth: _auth,
+            tab: int.tryParse(state.pathParameters['tab'] ?? '') ?? 0,
+          );
+        },
+        routes: [
+          // TODO: Add restaurant Page
+        ],
+      )
     ],
     errorPageBuilder: (context, state) {
       return MaterialPage(
@@ -93,7 +111,17 @@ class _YummyState extends State<Yummy> {
     },
   );
   
-  // TODO: Add Redirect Handler
+  Future<String?> _appRedirect(BuildContext context, GoRouterState state) async {
+    final loggedIn = await _auth.loggedIn;
+    final isOnLoginPage = state.matchedLocation == '/login';
+    if (!loggedIn) {
+      return '/login';
+    }
+    else if (loggedIn && isOnLoginPage) {
+      return '/${YummyTab.home.value}';
+    }
+    return null;
+  }
 
   void changeThemeMode(bool useLightMode) {
     setState(() {
@@ -108,7 +136,6 @@ class _YummyState extends State<Yummy> {
 
   @override
   Widget build(BuildContext context) {
-    const String appTitle = 'Yummy';
     return MaterialApp.router(
       title: appTitle,
       debugShowCheckedModeBanner: false,

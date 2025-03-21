@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yummy/models/models.dart';
 import 'package:yummy/screens/screens.dart';
 import 'package:yummy/components/components.dart';
@@ -90,7 +91,7 @@ class _HomeState extends State<Home> {
         destinations: appBarDestinations,
         selectedIndex: widget.tab,
         onDestinationSelected: (index) {
-          // TODO: Navigate to specific tab
+          context.go('/$index');
         }
       ),
     );
