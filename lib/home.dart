@@ -68,7 +68,10 @@ class _HomeState extends State<Home> {
           darkMode: true
         ),
         onLogOut: (logout) async {
-          // TODO: Logout and go to login
+          await widget.auth.signOut();
+          if (context.mounted) {
+            context.go('/login');
+          }
         }
       ),
     ];
