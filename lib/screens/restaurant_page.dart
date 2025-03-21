@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yummy/components/components.dart';
+import 'package:yummy/constants.dart';
 import 'package:yummy/screens/screens.dart';
 import 'package:yummy/models/models.dart';
 
@@ -188,8 +190,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
           didUpdate: () => setState(() {}),
           onSubmit: (order) {
             widget.ordersManager.addOrder(order);
-            // TODO: Navigate to Orders Page using go_router
-            Navigator.popUntil(context, (route) => route.isFirst);
+            context.pop();
+            context.go('/${YummyTab.orders.value}');
           }
         ),
       ),
