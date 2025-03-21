@@ -55,8 +55,22 @@ class _YummyState extends State<Yummy> {
         ),
       ),
       GoRoute(
+        path: '/invalid-tab',
+        builder: (context, state) {
+          return _buildPageNotFound(context);
+        },
+      ),
+      GoRoute(
         path: '/:tab',
         builder: (context, state) {
+          final tabValue = int.tryParse(state.pathParameters['tab'] ?? '') ?? 0;
+          final isValidTab = YummyTab.values.any((tab) => tab.value == tabValue);
+          
+          if (!isValidTab) {
+            context.replace('/invalid-tab');
+            return const SizedBox();
+          }
+          
           return Home(
             changeTheme: changeThemeMode,
             changeColor: changeColor,
@@ -69,9 +83,20 @@ class _YummyState extends State<Yummy> {
           );
         },
         routes: [
-          // TODO: Add restaurant Page
+          GoRoute(
+            path: 'restaurant/:id',
+            builder: (context, state) {
+              final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+              final restaurant = restaurants[id];
+              return RestaurantPage(
+                restaurant: restaurant,
+                cartManager: _cartManager,
+                ordersManager: _orderManager,
+              );
+            },
+          )
         ],
-      )
+      ),
     ],
     errorPageBuilder: (context, state) {
       return MaterialPage(
@@ -123,6 +148,40 @@ class _YummyState extends State<Yummy> {
     return null;
   }
 
+  Widget _buildPageNotFound(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Page Not Found'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.error_outline,
+            size: 80,
+            color: Colors.red,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Oops! Invalid Tab',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'The page you are trying to access doesn\'t exist.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton(
+            onPressed: () => context.go('/${YummyTab.home.value}'),
+            child: const Text('Go to Home'),
+          ),
+        ],
+      ),
+    );
+  }
+  
   void changeThemeMode(bool useLightMode) {
     setState(() {
       themeMode = useLightMode ? ThemeMode.light : ThemeMode.dark;

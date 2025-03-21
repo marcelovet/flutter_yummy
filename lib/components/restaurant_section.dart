@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:yummy/constants.dart';
 import 'package:yummy/models/models.dart';
-import 'package:yummy/screens/screens.dart';
 import 'package:yummy/components/components.dart';
 
 class RestaurantSection extends StatelessWidget {
@@ -40,16 +41,8 @@ class RestaurantSection extends StatelessWidget {
                   child: RestaurantLandscapeCard(
                     restaurant: restaurants[index],
                     onTap: () {
-                      // TODO: Navigate to Restaurant using go_router
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RestaurantPage(
-                            restaurant: restaurants[index],
-                            cartManager: cartManager,
-                            ordersManager: orderManager,
-                          ),
-                        ),
+                      context.go(
+                        '/${YummyTab.home.value}/restaurant/${restaurants[index].id}',
                       );
                     },
                   ),
