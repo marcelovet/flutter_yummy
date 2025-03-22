@@ -32,13 +32,10 @@ class _YummyState extends State<Yummy> {
   final String appTitle = 'Yummy';
   ThemeMode themeMode = ThemeMode.light;
   ColorSelection colorSelected = ColorSelection.pink;
-  /// Authentication to manage user login session
-  // ignore: unused_field
   final YummyAuth _auth = YummyAuth();
-  /// Manage user's shopping cart for the items they order.
   final CartManager _cartManager = CartManager();
-  /// Manage user's orders submitted
   final OrderManager _orderManager = OrderManager();
+  
   late final _router = GoRouter(
     initialLocation: '/login',
     redirect: _appRedirect,
